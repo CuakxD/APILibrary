@@ -1,6 +1,6 @@
 # API REST de Biblioteca 📚
 
-Una API completa para gestión de biblioteca desarrollada en PHP y MySQL, diseñada especialmente para que los estudiantes aprendan a consumir APIs usando POSTMAN.
+Una API completa para gestión de biblioteca desarrollada en PHP y MySQL, diseñada especialmente para que los estudiantes aprendan a consumir APIs usando POSTMAN. :D
 
 ## 🚀 Configuración Inicial
 
