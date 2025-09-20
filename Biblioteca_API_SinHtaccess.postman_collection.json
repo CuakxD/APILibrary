@@ -1,10 +1,18 @@
 {
   "info": {
-    "_postman_id": "biblioteca-api-collection-fixed",
-    "name": "Biblioteca API - Sin htaccess",
-    "description": "API REST para gestión de biblioteca (URLs corregidas para funcionar sin .htaccess)",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "_postman_id": "biblioteca-api-collection-v2",
+    "name": "Biblioteca API - Completa v2.0",
+    "description": "API REST completa para gestión de biblioteca con estadísticas avanzadas y endpoints de verificación",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "2.0"
   },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost/APILibrary",
+      "description": "URL base de la API - cambiar para producción"
+    }
+  ],
   "item": [
     {
       "name": "📋 Información y Estadísticas",
@@ -19,11 +27,12 @@
               "host": ["{{base_url}}"],
               "path": [""]
             },
-            "description": "Obtiene información general de la API, endpoints disponibles y ejemplos"
-          }
+            "description": "Obtiene información general de la API, endpoints disponibles y ejemplos con URLs automáticas"
+          },
+          "response": []
         },
         {
-          "name": "Estadísticas de la Biblioteca",
+          "name": "Estadísticas Completas",
           "request": {
             "method": "GET",
             "header": [],
@@ -32,8 +41,98 @@
               "host": ["{{base_url}}"],
               "path": ["index.php", "stats"]
             },
-            "description": "Obtiene estadísticas generales: total de libros, disponibles, géneros, etc."
-          }
+            "description": "Estadísticas completas: total libros, autores, géneros, distribución por década, listas completas"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔍 Verificación y Consultas",
+      "item": [
+        {
+          "name": "Verificar Autor Existente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/index.php/check-author/García Márquez",
+              "host": ["{{base_url}}"],
+              "path": ["index.php", "check-author", "García Márquez"]
+            },
+            "description": "Verifica si un autor específico existe en la base de datos"
+          },
+          "response": []
+        },
+        {
+          "name": "Verificar Autor Inexistente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/index.php/check-author/J.K. Rowling",
+              "host": ["{{base_url}}"],
+              "path": ["index.php", "check-author", "J.K. Rowling"]
+            },
+            "description": "Ejemplo de verificación de autor que no existe"
+          },
+          "response": []
+        },
+        {
+          "name": "Verificar Género Existente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/index.php/check-genre/Realismo mágico",
+              "host": ["{{base_url}}"],
+              "path": ["index.php", "check-genre", "Realismo mágico"]
+            },
+            "description": "Verifica si un género específico existe en la base de datos"
+          },
+          "response": []
+        },
+        {
+          "name": "Verificar Género Inexistente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/index.php/check-genre/Ciencia ficción",
+              "host": ["{{base_url}}"],
+              "path": ["index.php", "check-genre", "Ciencia ficción"]
+            },
+            "description": "Ejemplo de verificación de género que no existe"
+          },
+          "response": []
+        },
+        {
+          "name": "Información Detallada de Autor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/index.php/author-info/García Márquez",
+              "host": ["{{base_url}}"],
+              "path": ["index.php", "author-info", "García Márquez"]
+            },
+            "description": "Obtiene información detallada de un autor: total libros, disponibilidad, años de publicación, géneros"
+          },
+          "response": []
+        },
+        {
+          "name": "Info de Autor con Pocos Libros",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/index.php/author-info/Antoine de Saint-Exupery",
+              "host": ["{{base_url}}"],
+              "path": ["index.php", "author-info", "Antoine de Saint-Exupery"]
+            },
+            "description": "Ejemplo de autor con un solo libro para ver diferencias en respuesta"
+          },
+          "response": []
         }
       ]
     },
@@ -454,13 +553,6 @@
         "type": "text/javascript",
         "exec": [""]
       }
-    }
-  ],
-  "variable": [
-    {
-      "key": "base_url",
-      "value": "http://localhost/APILibrary",
-      "type": "string"
     }
   ]
 }
