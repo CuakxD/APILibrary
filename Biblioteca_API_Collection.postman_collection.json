@@ -1,0 +1,466 @@
+{
+  "info": {
+    "_postman_id": "biblioteca-api-collection",
+    "name": "Biblioteca API - Colección Completa",
+    "description": "API REST para gestión de biblioteca con ejemplos de errores para aprendizaje",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "📋 Información y Estadísticas",
+      "item": [
+        {
+          "name": "Información de la API",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
+            },
+            "description": "Obtiene información general de la API, endpoints disponibles y ejemplos"
+          }
+        },
+        {
+          "name": "Estadísticas de la Biblioteca",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/index.php/stats",
+              "host": ["{{base_url}}"],
+              "path": ["index.php", "stats"]
+            },
+            "description": "Obtiene estadísticas generales: total de libros, disponibles, géneros, etc."
+          }
+        }
+      ]
+    },
+    {
+      "name": "📚 Gestión de Libros",
+      "item": [
+        {
+          "name": "Obtener Todos los Libros",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/index.php/libros",
+              "host": ["{{base_url}}"],
+              "path": ["index.php", "libros"]
+            },
+            "description": "Obtiene la lista completa de libros en la biblioteca"
+          }
+        },
+        {
+          "name": "Obtener Libro por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/index.php/libros/1",
+              "host": ["{{base_url}}"],
+              "path": ["index.php", "libros", "1"]
+            },
+            "description": "Obtiene un libro específico por su ID"
+          }
+        },
+        {
+          "name": "Crear Nuevo Libro",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"titulo\": \"El nombre del viento\",\n    \"autor\": \"Patrick Rothfuss\",\n    \"isbn\": \"9788401352836\",\n    \"genero\": \"Fantasía\",\n    \"año_publicacion\": 2007,\n    \"disponible\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/libros",
+              "host": ["{{base_url}}"],
+              "path": ["libros"]
+            },
+            "description": "Crea un nuevo libro en la biblioteca"
+          }
+        },
+        {
+          "name": "Actualizar Libro",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"disponible\": false,\n    \"genero\": \"Fantasía épica\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/libros/1",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "1"]
+            },
+            "description": "Actualiza un libro existente (actualización parcial)"
+          }
+        },
+        {
+          "name": "Eliminar Libro",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/1",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "1"]
+            },
+            "description": "Elimina un libro de la biblioteca"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔍 Filtros y Búsquedas",
+      "item": [
+        {
+          "name": "Filtrar por Género",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros?genero=Realismo mágico",
+              "host": ["{{base_url}}"],
+              "path": ["libros"],
+              "query": [
+                {
+                  "key": "genero",
+                  "value": "Realismo mágico"
+                }
+              ]
+            },
+            "description": "Busca libros por género específico"
+          }
+        },
+        {
+          "name": "Filtrar por Autor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros?autor=García Márquez",
+              "host": ["{{base_url}}"],
+              "path": ["libros"],
+              "query": [
+                {
+                  "key": "autor",
+                  "value": "García Márquez"
+                }
+              ]
+            },
+            "description": "Busca libros por autor"
+          }
+        },
+        {
+          "name": "Filtrar por Disponibilidad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros?disponible=true",
+              "host": ["{{base_url}}"],
+              "path": ["libros"],
+              "query": [
+                {
+                  "key": "disponible",
+                  "value": "true"
+                }
+              ]
+            },
+            "description": "Filtra libros disponibles o no disponibles"
+          }
+        },
+        {
+          "name": "Filtrar por Rango de Años",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros?año_desde=1950&año_hasta=2000",
+              "host": ["{{base_url}}"],
+              "path": ["libros"],
+              "query": [
+                {
+                  "key": "año_desde",
+                  "value": "1950"
+                },
+                {
+                  "key": "año_hasta",
+                  "value": "2000"
+                }
+              ]
+            },
+            "description": "Filtra libros publicados en un rango de años"
+          }
+        },
+        {
+          "name": "Filtros Combinados",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros?genero=Novela&disponible=true&año_desde=1990",
+              "host": ["{{base_url}}"],
+              "path": ["libros"],
+              "query": [
+                {
+                  "key": "genero",
+                  "value": "Novela"
+                },
+                {
+                  "key": "disponible",
+                  "value": "true"
+                },
+                {
+                  "key": "año_desde",
+                  "value": "1990"
+                }
+              ]
+            },
+            "description": "Combina múltiples filtros"
+          }
+        }
+      ]
+    },
+    {
+      "name": "❌ Ejemplos de Errores",
+      "item": [
+        {
+          "name": "Error 400 - Bad Request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/error/400",
+              "host": ["{{base_url}}"],
+              "path": ["error", "400"]
+            },
+            "description": "Ejemplo de error 400 Bad Request"
+          }
+        },
+        {
+          "name": "Error 401 - Unauthorized",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/error/401",
+              "host": ["{{base_url}}"],
+              "path": ["error", "401"]
+            },
+            "description": "Ejemplo de error 401 Unauthorized"
+          }
+        },
+        {
+          "name": "Error 403 - Forbidden",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/error/403",
+              "host": ["{{base_url}}"],
+              "path": ["error", "403"]
+            },
+            "description": "Ejemplo de error 403 Forbidden"
+          }
+        },
+        {
+          "name": "Error 404 - Not Found",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/error/404",
+              "host": ["{{base_url}}"],
+              "path": ["error", "404"]
+            },
+            "description": "Ejemplo de error 404 Not Found"
+          }
+        },
+        {
+          "name": "Error 500 - Internal Server Error",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/error/500",
+              "host": ["{{base_url}}"],
+              "path": ["error", "500"]
+            },
+            "description": "Ejemplo de error 500 Internal Server Error"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧪 Casos de Error Reales",
+      "item": [
+        {
+          "name": "Libro No Encontrado (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/999",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "999"]
+            },
+            "description": "Intenta obtener un libro que no existe"
+          }
+        },
+        {
+          "name": "Crear Libro - Campos Faltantes (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"titulo\": \"Libro Incompleto\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/libros",
+              "host": ["{{base_url}}"],
+              "path": ["libros"]
+            },
+            "description": "Intenta crear un libro sin todos los campos obligatorios"
+          }
+        },
+        {
+          "name": "Crear Libro - JSON Inválido (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"titulo\": \"Libro con JSON malo\",\n    \"autor\": \"Sin cerrar comillas\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/libros",
+              "host": ["{{base_url}}"],
+              "path": ["libros"]
+            },
+            "description": "Envía JSON malformado"
+          }
+        },
+        {
+          "name": "Crear Libro - Año Inválido (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"titulo\": \"Libro del Futuro\",\n    \"autor\": \"Autor Temporal\",\n    \"isbn\": \"9781234567890\",\n    \"genero\": \"Ciencia Ficción\",\n    \"año_publicacion\": 2030,\n    \"disponible\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/libros",
+              "host": ["{{base_url}}"],
+              "path": ["libros"]
+            },
+            "description": "Intenta crear un libro con año futuro"
+          }
+        },
+        {
+          "name": "Actualizar Libro No Existente (404)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"disponible\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/libros/999",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "999"]
+            },
+            "description": "Intenta actualizar un libro que no existe"
+          }
+        },
+        {
+          "name": "Eliminar Libro No Existente (404)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/libros/999",
+              "host": ["{{base_url}}"],
+              "path": ["libros", "999"]
+            },
+            "description": "Intenta eliminar un libro que no existe"
+          }
+        },
+        {
+          "name": "Endpoint No Válido (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/endpoint-inexistente",
+              "host": ["{{base_url}}"],
+              "path": ["endpoint-inexistente"]
+            },
+            "description": "Accede a un endpoint que no existe"
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost/APILibrary",
+      "type": "string"
+    }
+  ]
+}
